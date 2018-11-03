@@ -15,12 +15,17 @@ class FileReaderWriter:
             data = f.readlines()
         count_of_people, dates = data[0].split('-')
         count_of_people = int(count_of_people)
-        dates = list(map(lambda x: int(x), dates.split(' ')))
+        dates = dates.split(' ')
+        dates.remove('\n')
+        dates = list(map(lambda x: int(x), dates))
         peoples = []
+
         for i in range(1, count_of_people + 1):
             name, visiting = data[i].split('-')
             people = People(name)
-            visiting = list(map(lambda x: bool(x), visiting))
+            visiting = visiting.split(' ')
+            visiting.remove('\n')
+            visiting = list(map(lambda x: bool(int(x)), visiting))
             people.set_visiting(dates, visiting)
             peoples.append(people)
         return peoples, dates
@@ -39,7 +44,7 @@ class FileReaderWriter:
         with open(path_to_file, 'w') as f:
             f.write(result)
 
-    def write_report_to_file(self, dates, peoples, sums):
+    def write_report_to_file(self, dates, peoples, sums, path_to_file):
         result = ''
         max_lens = dict()
         i = 0
@@ -72,6 +77,6 @@ class FileReaderWriter:
                     lsum += people.sums[date]
             result += str(lsum) + ' ' * (max_lens[date] - len(str(lsum)) + 1)
 
-        with open('info.txt', mode='w') as f:
+        with open(path_to_file, mode='w') as f:
             f.write(result)
 

@@ -6,14 +6,13 @@ class VisitingController:
     def __init__(self):
         self.peoples = []
         self.dates = []
-        with open('names.txt', 'r') as file:
-            for name in file.readlines():
-                self.peoples.append(People(name))
         f = FileReaderWriter()
         try:
-            peoples, dates = f.read_from_info_file('info.txt')
-        except ValueError:
-            pass
+            self.peoples, self.dates = f.read_from_info_file('info.txt')
+        except Exception:
+            with open('names.txt', 'r') as file:
+                for name in file.readlines():
+                    self.peoples.append(People(name[0:len(name) - 1]))
         finally:
             self.read_visiting_data()
 

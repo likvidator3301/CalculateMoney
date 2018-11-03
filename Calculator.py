@@ -10,11 +10,13 @@ class Calculator:
         print('Введите название месяца:')
         self.mouth = input()
         self.peoples = []
+        f = FileReaderWriter()
         if mode == 'file':
-            f = FileReaderWriter()
             self.peoples, self.dates = f.read_from_info_file('info.txt')
         c = ConsoleReaderWriter()
         self.sums = c.read_sums_from_console(self.dates, self.mouth)
+        self.calculate_sums(self.sums, self.peoples, self.dates)
+        f.write_report_to_file(self.dates, self.peoples, self.sums, 'report_' + self.mouth + '.txt')
 
     def read_from_console(self):
         peoples = []

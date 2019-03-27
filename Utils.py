@@ -1,5 +1,5 @@
 from Entities import People
-
+import math
 
 class ConsoleReaderWriter:
     def read_sums_from_console(self, dates, mouth):
@@ -75,6 +75,7 @@ class FileReaderWriter:
             for people in peoples:
                 if date in people.sums:
                     lsum += people.sums[date]
+            lsum = round(lsum, 2)
             result += str(lsum) + ' ' * (max_lens[date] - len(str(lsum)) + 1)
 
         with open(path_to_file, mode='w') as f:

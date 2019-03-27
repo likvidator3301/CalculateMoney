@@ -4,7 +4,7 @@ from Utils import FileReaderWriter, ConsoleReaderWriter
 
 
 class Calculator:
-    def __init__(self, mode='file'):
+    def __init__(self, path_to_info, path_to_report, mode='file'):
         self.dates = []
         self.sums = []
         print('Введите название месяца:')
@@ -12,11 +12,11 @@ class Calculator:
         self.peoples = []
         f = FileReaderWriter()
         if mode == 'file':
-            self.peoples, self.dates = f.read_from_info_file('info.txt')
+            self.peoples, self.dates = f.read_from_info_file(path_to_info)
         c = ConsoleReaderWriter()
         self.sums = c.read_sums_from_console(self.dates, self.mouth)
         self.calculate_sums(self.sums, self.peoples, self.dates)
-        f.write_report_to_file(self.dates, self.peoples, self.sums, 'report_' + self.mouth + '.txt')
+        f.write_report_to_file(self.dates, self.peoples, self.sums, path_to_report)
 
     def read_from_console(self):
         peoples = []

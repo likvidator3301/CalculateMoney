@@ -7,9 +7,9 @@ import sys
 def main():
     if len(sys.argv) > 1:
         if sys.argv[1] == '-v':
-            v = VisitingController()
+            v = VisitingController(sys.argv[2], sys.argv[3])
         elif sys.argv[1] == '-c':
-            c = Calculator()
+            c = Calculator(sys.argv[2], sys.argv[3])
 
 if __name__ == '__main__':
     main()

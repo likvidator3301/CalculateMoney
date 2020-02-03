@@ -69,7 +69,7 @@ class FileReaderWriter:
                     result += str(people.sums[date]) + ' ' * (max_lens[date] - len(str(people.sums[date])) + 1)
                 else:
                     result += '0' + ' ' * max_lens[date]
-            result += people.name + ' ' + str(sum(people.sums.values())) + ' рублей\n'
+            result += people.name + ' ' + str(round(sum(people.sums.values()), 2)) + ' рублей\n'
         for date in dates:
             lsum = 0
             for people in peoples:
